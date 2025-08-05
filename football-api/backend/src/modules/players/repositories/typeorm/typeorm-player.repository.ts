@@ -94,6 +94,8 @@ async getAllPositions(): Promise<string[]> {
     player.shooting = playerDto.shooting ?? 0;
     player.dribbling = playerDto.dribbling ?? 0;
     player.passing = playerDto.passing ?? 0;
+    player.defending = playerDto.defending ?? 0;
+    player.physic = playerDto.physic ?? 0;
 
     return player;
   }

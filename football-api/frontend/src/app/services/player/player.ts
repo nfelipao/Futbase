@@ -14,7 +14,8 @@ export interface Player {
   shooting: number;
   dribbling: number;
   passing: number;
-}
+  defending: number;
+  physic: number;}
 
 @Injectable({
   providedIn: 'root',

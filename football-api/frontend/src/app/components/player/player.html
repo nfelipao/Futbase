@@ -120,7 +120,7 @@
   </div>
 
 
-  <!-- Modal -->
+
 <div class="modal fade" id="playerDetailModal" tabindex="-1" aria-labelledby="playerDetailModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content bg-dark text-white">
@@ -129,53 +129,28 @@
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body d-flex align-items-center">
-      <div class="fifa-card p-3 border rounded bg-secondary w-100">
-        <!-- FOTO CENTRADA -->
-        <div class="text-center mb-3">
-          <img
-            [src]="selectedPlayer?.playerFaceUrl"
-            alt="{{ selectedPlayer?.name }}"
-            class="rounded-circle border border-2"
-            width="100"
-            height="100"
-          />
-        </div>
 
-        <!-- NOMBRE, CLUB, POSICIÓN, BANDERA -->
-        <h4 class="text-center">{{ selectedPlayer?.name }}</h4>
-        <p class="text-center mb-1">
+    <div class="fifa-card-fake p-4 text-center text-white rounded">
+  <div class="fifa-rating">{{ selectedPlayer?.rating }}</div>
+  <div class="fifa-position">{{ selectedPlayer?.position }}</div>
+  <img [src]="selectedPlayer?.playerFaceUrl" class="player-face mb-2" />
+ <div class="fifa-name">{{ selectedPlayer?.name }}</div>
+            <p class="text-center mb-1">
           {{ nationalityFlags[selectedPlayer?.nationality || ''] }}
           {{ selectedPlayer?.nationality }}
-          &mdash; {{ selectedPlayer?.club }}
         </p>
-        <p class="text-center mb-3">Posición: {{ selectedPlayer?.position }}</p>
+ 
 
-        <!-- RATING GRANDE -->
-        <div class="d-flex justify-content-center mb-3">
-          <h2 class="display-6">{{ selectedPlayer?.rating }}</h2>
-        </div>
-        <hr />
-
-        <!-- ESTADÍSTICAS -->
-        <div class="row text-center">
-          <div class="col-3">
-            <strong>Ritmo</strong>
-            <p>{{ selectedPlayer?.speed }}</p>
-          </div>
-          <div class="col-3">
-            <strong>Tiro</strong>
-            <p>{{ selectedPlayer?.shooting }}</p>
-          </div>
-          <div class="col-3">
-            <strong>Dribbling</strong>
-            <p>{{ selectedPlayer?.dribbling }}</p>
-          </div>
-          <div class="col-3">
-            <strong>Pase</strong>
-            <p>{{ selectedPlayer?.passing }}</p>
-          </div>
-        </div>
-      </div>
+  <div class="fifa-club">{{ selectedPlayer?.club }}</div>
+  <div class="row mt-3">
+    <div class="col-4"><strong>PAC</strong><br>{{ selectedPlayer?.speed }}</div>
+    <div class="col-4"><strong>SHO</strong><br>{{ selectedPlayer?.shooting }}</div>
+    <div class="col-4"><strong>PAS</strong><br>{{ selectedPlayer?.passing }}</div>
+    <div class="col-4"><strong>DRI</strong><br>{{ selectedPlayer?.dribbling }}</div>
+    <div class="col-4"><strong>DEF</strong><br>{{ selectedPlayer?.defending }}</div>
+    <div class="col-4"><strong>PHY</strong><br>{{ selectedPlayer?.physic }}</div>
+  </div>
+</div>
 
       </div>
     </div>
