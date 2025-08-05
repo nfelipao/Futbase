@@ -124,34 +124,47 @@
 <div class="modal fade" id="playerDetailModal" tabindex="-1" aria-labelledby="playerDetailModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content bg-dark text-white">
-      <div class="modal-header">
+      <div class="modal-header border-0">
         <h5 class="modal-title" id="playerDetailModalLabel">{{ selectedPlayer?.name }}</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body d-flex align-items-center">
 
-    <div class="fifa-card-fake p-4 text-center text-white rounded">
-  <div class="fifa-rating">{{ selectedPlayer?.rating }}</div>
-  <div class="fifa-position">{{ selectedPlayer?.position }}</div>
-  <img [src]="selectedPlayer?.playerFaceUrl" class="player-face mb-2" />
- <div class="fifa-name">{{ selectedPlayer?.name }}</div>
-            <p class="text-center mb-1">
-          {{ nationalityFlags[selectedPlayer?.nationality || ''] }}
-          {{ selectedPlayer?.nationality }}
-        </p>
- 
+      <div class="modal-body d-flex justify-content-center">
+        <div class="fifa-card-fake text-center text-white p-4 rounded position-relative">
 
-  <div class="fifa-club">{{ selectedPlayer?.club }}</div>
-  <div class="row mt-3">
-    <div class="col-4"><strong>PAC</strong><br>{{ selectedPlayer?.speed }}</div>
-    <div class="col-4"><strong>SHO</strong><br>{{ selectedPlayer?.shooting }}</div>
-    <div class="col-4"><strong>PAS</strong><br>{{ selectedPlayer?.passing }}</div>
-    <div class="col-4"><strong>DRI</strong><br>{{ selectedPlayer?.dribbling }}</div>
-    <div class="col-4"><strong>DEF</strong><br>{{ selectedPlayer?.defending }}</div>
-    <div class="col-4"><strong>PHY</strong><br>{{ selectedPlayer?.physic }}</div>
-  </div>
-</div>
+          <div class="fifa-rating">{{ selectedPlayer?.rating }}</div>
+          <div class="fifa-position">{{ selectedPlayer?.position }}</div>
 
+          <img [src]="selectedPlayer?.playerFaceUrl" class="player-face mb-3" alt="Player Face" />
+
+          <div class="fifa-name">{{ selectedPlayer?.name }}</div>
+
+          <div class="mt-1">
+            {{ nationalityFlags[selectedPlayer?.nationality || ''] }}
+            <span class="small">{{ selectedPlayer?.nationality }}</span>
+          </div>
+
+          <div class="fifa-club mb-3">{{ selectedPlayer?.club }}</div>
+
+          <!-- Stat Grid -->
+          <div class="row text-start small g-2 mb-3">
+            <div class="col-4"><strong>PAC</strong><br>{{ selectedPlayer?.speed }}</div>
+            <div class="col-4"><strong>SHO</strong><br>{{ selectedPlayer?.shooting }}</div>
+            <div class="col-4"><strong>PAS</strong><br>{{ selectedPlayer?.passing }}</div>
+            <div class="col-4"><strong>DRI</strong><br>{{ selectedPlayer?.dribbling }}</div>
+            <div class="col-4"><strong>DEF</strong><br>{{ selectedPlayer?.defending ?? '-' }}</div>
+            <div class="col-4"><strong>PHY</strong><br>{{ selectedPlayer?.physic ?? '-' }}</div>
+          </div>
+
+          <!-- Extra Info -->
+          <div class="info-extra text-start small border-top pt-2">
+            <div><strong>Edad:</strong> {{ selectedPlayer?.age }}</div>
+            <div><strong>Altura:</strong> {{ selectedPlayer?.heightCm }} cm</div>
+            <div><strong>Peso:</strong> {{ selectedPlayer?.weightKg }} kg</div>
+            <div><strong>FIFA:</strong> {{ selectedPlayer?.fifaVersion }} - V{{ selectedPlayer?.fifaUpdate }}</div>
+          </div>
+
+        </div>
       </div>
     </div>
   </div>

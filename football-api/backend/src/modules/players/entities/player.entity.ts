@@ -12,4 +12,10 @@ export class Player {
   declare passing: number;
   declare defending: number;
   declare physic: number;
+  declare heightCm: number;
+  declare weightKg: number;
+  declare age: number;
+  declare preferredFoot: string;
+  declare fifaVersion: number;
+  declare fifaUpdate: number;
 }

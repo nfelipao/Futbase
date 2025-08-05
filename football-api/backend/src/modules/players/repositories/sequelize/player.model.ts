@@ -14,11 +14,11 @@ export class PlayerModel extends Model<PlayerModel> {
   @Column(DataType.INTEGER)
   declare id: number;
 
-  @Column({ field: 'fifa_version', type: DataType.STRING })
-  declare fifaVersion: string;
+  @Column({ field: 'fifa_version', type: DataType.INTEGER })
+  declare fifaVersion: number;
 
-  @Column({ field: 'fifa_update', type: DataType.STRING })
-  declare fifaUpdate: string;
+  @Column({ field: 'fifa_update', type: DataType.INTEGER })
+  declare fifaUpdate: number;
 
   @Column({ field: 'player_face_url', type: DataType.STRING })
   declare playerFaceUrl: string;
@@ -54,10 +54,10 @@ export class PlayerModel extends Model<PlayerModel> {
   declare heightCm?: number;
 
   @Column({ field: 'weight_kg', type: DataType.INTEGER, allowNull: true })
-  weightKg?: number;
+  declare weightKg?: number;
 
   @Column({ field: 'preferred_foot', type: DataType.STRING, allowNull: true })
-  preferredFoot?: string;
+  declare preferredFoot?: string;
 
   @Column({ field: 'weak_foot', type: DataType.INTEGER, allowNull: true })
   weakFoot?: number;

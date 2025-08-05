@@ -96,6 +96,12 @@ async getAllPositions(): Promise<string[]> {
     player.passing = playerDto.passing ?? 0;
     player.defending = playerDto.defending ?? 0;
     player.physic = playerDto.physic ?? 0;
+    player.heightCm = playerDto.heightCm ?? 0;
+    player.weightKg = playerDto.weightKg ?? 0;
+    player.age = playerDto.age ?? 0;
+    player.preferredFoot = playerDto.preferredFoot || 'Unknown';
+    player.fifaVersion = playerDto.fifaVersion ?? 0;
+    player.fifaUpdate = playerDto.fifaUpdate ?? 0;
 
     return player;
   }

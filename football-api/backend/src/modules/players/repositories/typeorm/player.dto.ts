@@ -26,7 +26,7 @@ export class PlayerDto {
     length: 255,
     nullable: false,
   })
-  fifaVersion: string;
+  fifaVersion: number;
 
   /**
    * @description
@@ -38,7 +38,7 @@ export class PlayerDto {
     length: 255,
     nullable: false,
   })
-  fifaUpdate: string;
+  fifaUpdate: number;
 
   /**
    * @description

@@ -12,6 +12,12 @@ export class PlayerDto {
   passing: number;
   defending: number;
   physic: number;
+  heightCm: number;
+  weightKg: number;
+  age: number;
+  preferredFoot: string;
+  fifaVersion: number;
+  fifaUpdate: number;
 
   constructor(partial: Partial<PlayerDto>) {
     Object.assign(this, partial);

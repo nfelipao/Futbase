@@ -172,3 +172,52 @@ th.sortable i {
 .table-row:hover {
   transform: scale(1.01);
 }
+.fifa-card-fake {
+  background: linear-gradient(to bottom, #3c3c3c, #1b1b1b);
+  border: 3px solid gold;
+  border-radius: 1.5rem;
+  width: 100%;
+  max-width: 330px;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.2);
+  font-family: 'Arial Black', sans-serif;
+  padding: 2rem 1.5rem;
+  position: relative;
+}
+
+.fifa-rating {
+  position: absolute;
+  top: 12px;
+  left: 16px;
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.fifa-position {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+}
+
+.player-face {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid white;
+  background-color: #222;
+}
+
+.fifa-name {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 0.2rem;
+}
+
+.fifa-club {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #ccc;
+}
+

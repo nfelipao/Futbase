@@ -15,7 +15,13 @@ export interface Player {
   dribbling: number;
   passing: number;
   defending: number;
-  physic: number;}
+  physic: number;
+  heightCm: number;
+  weightKg: number;
+  age: number;
+  preferredFoot: string;
+  fifaVersion: number;
+  fifaUpdate: number;}
 
 @Injectable({
   providedIn: 'root',
@@ -55,4 +61,6 @@ export class PlayerService {
     return this.http.get<string[]>(`${this.baseUrl}/positions`);
   }
 
+
+  
 }
