@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Player {
@@ -31,8 +31,17 @@ export class PlayerService {
 
   constructor(private http: HttpClient) { }
 
+  private getHeaders() {
+    const token = localStorage.getItem('access_token');
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+    })
+  }
+
   getPlayer(id: number): Observable<Player> {
-    return this.http.get<Player>(`${this.baseUrl}/${id}`);
+    return this.http.get<Player>(`${this.baseUrl}/${id}`,
+      { headers: this.getHeaders(),
+      });
   }
 
   getPlayers(
@@ -50,15 +59,19 @@ export class PlayerService {
       size,
     };
 
-    return this.http.get<{ data: Player[]; total: number }>(this.baseUrl, { params });
+    return this.http.get<{ data: Player[]; total: number }>(this.baseUrl, { params, headers: this.getHeaders(), });
   }
 
   getClubs(): Observable<string[]> {
-    return this.http.get<string[]>(`${this.baseUrl}/clubs`);
+    return this.http.get<string[]>(`${this.baseUrl}/clubs`,
+      { headers: this.getHeaders(), }
+    );
   }
 
   getPositions(): Observable<string[]> {
-    return this.http.get<string[]>(`${this.baseUrl}/positions`);
+    return this.http.get<string[]>(`${this.baseUrl}/positions`
+      , { headers: this.getHeaders(), }
+    );
   }
 
 

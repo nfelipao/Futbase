@@ -33,7 +33,7 @@ export class TypeOrmPlayerRepository implements IPlayerRepository {
 
 
 async getAllClubs(): Promise<string[]> {
-  return []; // No lo usás, así que puede estar vacío por ahora
+  return [];
 }
 
 async getAllPositions(): Promise<string[]> {
@@ -90,7 +90,7 @@ async getAllPositions(): Promise<string[]> {
     player.position = playerDto.playerPositions.split(',')[0].trim();
     player.nationality = playerDto.nationalityName || 'Unknown Nationality';
     player.rating = playerDto.overall;
-    player.speed = playerDto.pace ?? 0; // Using nullish coalescing operator (??) for numeric defaults
+    player.speed = playerDto.pace ?? 0;
     player.shooting = playerDto.shooting ?? 0;
     player.dribbling = playerDto.dribbling ?? 0;
     player.passing = playerDto.passing ?? 0;

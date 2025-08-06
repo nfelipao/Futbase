@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { PlayerModel } from './player.model'; // Sequelize model
+import { PlayerModel } from './player.model';
 import { IPlayerRepository } from '../../interfaces/player-repository.interface';
 import { Player } from '../../entities/player.entity';
 import { Op } from 'sequelize';

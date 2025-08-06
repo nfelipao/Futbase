@@ -4,6 +4,7 @@ import { PlayerService } from '../../services/player/player';
 import { Player } from '../../services/player/player';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-player',
@@ -31,7 +32,7 @@ export class PlayerComponent implements OnInit {
   sortedPlayers: Player[] = [];
   searchName: string = '';
 
-  constructor(private playerService: PlayerService) { }
+  constructor(private playerService: PlayerService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.sortColumn = 'name';
@@ -229,7 +230,7 @@ export class PlayerComponent implements OnInit {
     'Iraq': '🇮🇶',
     'Luxembourg': '🇱🇺',
     'Philippines': '🇵🇭',
-    'Khazakstan': '🇰🇿',
+    'Kazakhstan': '🇰🇿',
     'Kosovo': '🇽🇰',
     'Faroe Islands': '🇫🇴',
     'Uganda': '🇺🇬',
@@ -263,6 +264,15 @@ export class PlayerComponent implements OnInit {
     'Malta': '🇲🇹',
     'Fiji': '🇫🇯',
     'Mozambique': '🇲🇿',
+    'Uzbekistan': '🇺🇿',
+    'Liberia': '🇱🇷',
+    'New Caledonia': '🇳🇨',
+    'Equatorial Guinea': '🇬🇶',
+    'Korea DPR': '🇰🇵',
+    'Moldava': '🇲🇩',
+    'Guam': '🇬🇺',
+    'Madagascar': '🇲🇬',
+    'Bahrain': '🇧🇭',
   }
 
   getRatingClass(rating: number): string {
@@ -313,5 +323,7 @@ openPlayerModal(player: Player): void {
   });
 }
 
-
+  onLogout(): void {
+    this.authService.logout();
+  }
 }

@@ -6,12 +6,17 @@ import {
   NotFoundException,
   Param,
   ParseIntPipe,
+  Query
 } from '@nestjs/common';
+
 import { PlayersService } from './players.service';
 import { PlayerDto } from './dto/player.dto';
 
-import { Query } from '@nestjs/common';
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
+
+@UseGuards(JwtAuthGuard)
 @Controller('api/players')
 export class PlayersController {
   constructor(private readonly playersService: PlayersService) {}
