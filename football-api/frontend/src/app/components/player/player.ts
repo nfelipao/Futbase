@@ -31,25 +31,33 @@ export class PlayerComponent implements OnInit {
   sortDirection: 'asc' | 'desc' = 'asc';
   sortedPlayers: Player[] = [];
   searchName: string = '';
+  isDarkMode = false;
 
   constructor(private playerService: PlayerService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.sortColumn = 'name';
     this.sortDirection = 'asc';
+    this.isDarkMode = localStorage.getItem('futbase-dark') === '1';
 
     console.log('PlayerComponent initialized');
     this.playerService.getPlayer(1).subscribe({
       next: (data) => (this.player = data),
       error: (err) => (this.errorMessage = 'Jugador no encontrado'),
     });
-
-
     this.getFilterOptions();
     this.getPlayers();
-
-
   }
+
+  toggleDarkMode(): void {
+    this.isDarkMode = !this.isDarkMode;
+    try {
+      localStorage.setItem('futbase-dark', this.isDarkMode ? '1' : '0');
+    } catch (e) {
+      console.warn('No se pudo guardar la preferencia de tema', e);
+    }
+  }
+
   getFilterOptions() {
     this.playerService.getClubs().subscribe({
       next: (data) => this.clubs = data.sort((a, b) => a.localeCompare(b)),
@@ -99,28 +107,28 @@ export class PlayerComponent implements OnInit {
     this.sortedPlayers = [...this.players];
 
     if (!this.sortColumn) {
-      return }
+      return;
+    }
 
     this.sortedPlayers.sort((a, b) => {
-        const valueA = a[this.sortColumn as keyof Player];
-        const valueB = b[this.sortColumn as keyof Player];
+      const valueA = a[this.sortColumn as keyof Player];
+      const valueB = b[this.sortColumn as keyof Player];
 
-        if (typeof valueA === 'string' && typeof valueB === 'string') {
-          return this.sortDirection === 'asc'
-            ? valueA.localeCompare(valueB)
-            : valueB.localeCompare(valueA);
-        }
+      if (typeof valueA === 'string' && typeof valueB === 'string') {
+        return this.sortDirection === 'asc'
+          ? valueA.localeCompare(valueB)
+          : valueB.localeCompare(valueA);
+      }
 
-        if (typeof valueA === 'number' && typeof valueB === 'number') {
-          return this.sortDirection === 'asc' ? valueA - valueB : valueB - valueA;
-        }
+      if (typeof valueA === 'number' && typeof valueB === 'number') {
+        return this.sortDirection === 'asc' ? valueA - valueB : valueB - valueA;
+      }
 
-        return 0;
-      });
-    
+      return 0;
+    });
   }
 
-    setSort(column: string):void {
+  setSort(column: string): void {
     if (this.sortColumn === column) {
       this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
     } else {
@@ -136,7 +144,7 @@ export class PlayerComponent implements OnInit {
     'Germany': '🇩🇪',
     'France': '🇫🇷',
     'Spain': '🇪🇸',
-    'England': '🏴󠁧󠁢󠁥󠁮󠁧󠁿',
+    'England': '🏴',
     'Italy': '🇮🇹',
     'Netherlands': '🇳🇱',
     'Portugal': '🇵🇹',
@@ -160,7 +168,7 @@ export class PlayerComponent implements OnInit {
     'Turkey': '🇹🇷',
     'Egypt': '🇪🇬',
     'Nigeria': '🇳🇬',
-    'Wales': '🏴󠁧󠁢󠁷󠁬󠁳󠁿',
+    'Wales': '🏴',
     'Croatia': '🇭🇷 ',
     'Serbia': '🇷🇸',
     'Côte d\'Ivoire': '🇨🇮',
@@ -213,7 +221,7 @@ export class PlayerComponent implements OnInit {
     'Montenegro': '🇲🇪',
     'Togo': '🇹🇬',
     'Republic of Ireland': '🇮🇪',
-    'Northern Ireland': '🏴󠁧󠁢󠁮󠁩󠁲󠁿',
+    'Northern Ireland': '🏴',
     'Gabon': '🇬🇦',
     'Canada': '🇨🇦',
     'North Macedonia': '🇲🇰',
@@ -222,7 +230,7 @@ export class PlayerComponent implements OnInit {
     'Benin': '🇧🇯',
     'Iceland': '🇮🇸',
     'Guinea': '🇬🇳',
-    'Scotland': '🏴󠁧󠁢󠁳󠁣󠁴󠁿',
+    'Scotland': '🏴',
     'Congo DR': '🇨🇩',
     'Saudi Arabia': '🇸🇦',
     'Israel': '🇮🇱',
@@ -281,8 +289,6 @@ export class PlayerComponent implements OnInit {
     return 'low-rating';
   }
 
-
-
   getPositionClass(position: string): string {
     switch (position) {
       case 'GK':
@@ -309,19 +315,19 @@ export class PlayerComponent implements OnInit {
     }
   }
 
-openPlayerModal(player: Player): void {
-  this.playerService.getPlayer(player.id).subscribe({
-    next: full => {
-      this.selectedPlayer = full;
-      const modalEl = document.getElementById('playerDetailModal');
-      if (modalEl) {
-        const modal = new (window as any).bootstrap.Modal(modalEl);
-        modal.show();
-      }
-    },
-    error: err => console.error(err)
-  });
-}
+  openPlayerModal(player: Player): void {
+    this.playerService.getPlayer(player.id).subscribe({
+      next: full => {
+        this.selectedPlayer = full;
+        const modalEl = document.getElementById('playerDetailModal');
+        if (modalEl) {
+          const modal = new (window as any).bootstrap.Modal(modalEl);
+          modal.show();
+        }
+      },
+      error: err => console.error(err)
+    });
+  }
 
   onLogout(): void {
     this.authService.logout();

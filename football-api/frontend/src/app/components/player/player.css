@@ -1,223 +1,245 @@
-th.active {
-  text-decoration: underline;
-  cursor: pointer;
-}
-th {
-  cursor: pointer;
+
+:root{
+  --fut-blue: #093FB4;
+  --fut-blue-light: #3753c6;
+  --fut-orange: #ED3500;
+  --fut-white: #FFFCFB;            /* surface claro */
+  --surface: #ffffff;              /* tarjetas / tabla en modo claro */
+  --input-bg: #f3f6ff;             /* inputs en modo claro (suave) */
+  --muted: #6c757d;
+  --dark-700: #1f1f1f;
+  --text-dark: #111827;
+  --card-radius: 12px;
+  --shadow-soft: 0 8px 30px rgba(9,63,180,0.12);
+  --page-gradient-start: rgba(9,63,180,0.06);
+  --page-gradient-end: rgba(255,216,216,0.03);
 }
 
-th.fw-bold {
-  text-decoration: underline;
-}
-.sortable {
-  cursor: pointer;
-  user-select: none;
-  white-space: nowrap;
-}
-
-.sortable i {
-  margin-left: 4px;
-  font-size: 0.9rem;
-}
-/* Estilo para integrar ng-select con tema oscuro */
-/* Aplica los estilos a ng-select desde el componente Player usando ::ng-deep */
-::ng-deep .ng-select-dark .ng-dropdown-panel {
-  background-color: #343a40 !important;
-  border: 1px solid #6c757d !important;
-  color: #fff !important;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
-  backdrop-filter: none !important; /* Si el problema es por blur */
+html, body { 
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+ }
+.players-page {
+  background: linear-gradient(135deg, var(--page-gradient-start), var(--page-gradient-end));
+  min-height: 100vh;
+  box-sizing: border-box;
+  color: var(--text-dark);
 }
 
-::ng-deep .ng-select-dark .ng-dropdown-panel .ng-option {
-  background-color: transparent !important;
-  color: #fff !important;
+.players-page.dark-mode {
+  --text-dark: #e6e6e6;
+  --surface: #1f1f1f;
+  --input-bg: rgba(255,255,255,0.02);
+  --muted: #9aa4b2;
+  --shadow-soft: 0 10px 30px rgba(0,0,0,0.6);
+}
+
+.top-wrapper { margin-bottom: 1rem; }
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 18px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, rgba(9,63,180,0.95), rgba(41,80,200,0.95));
+  color: white;
+  box-shadow: var(--shadow-soft);
+  margin-bottom: 0.9rem;
+}
+.brand { display:flex; align-items:center; gap:10px; }
+.brand-logo { font-size: 1.45rem; }
+
+.brand-name { font-size: 1.15rem; font-weight:700; letter-spacing:0.6px; display:inline-flex; gap:6px; align-items:center; }
+.brand-name .brand-fut {
+  color: var(--fut-white);
+  background: linear-gradient(90deg, transparent 0, transparent 100%);
+  -webkit-text-stroke: 0px rgba(0,0,0,0.02);
+  text-shadow: 0 1px 0 rgba(0,0,0,0.18);
+  color: var(--fut-blue);
+  font-weight:800;
+}
+.brand-name .brand-base {
+  color: var(--fut-orange);
+  font-weight:800;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.04);
+}
+
+@media (max-width: 420px) { .brand-name { font-size: 1rem; } }
+
+
+.top-actions { display:flex; align-items:center; gap:10px; }
+.logout-btn {
+  background-color: var(--surface);
+  color: var(--fut-blue);
+  font-weight:700;
+  border:none;
+  padding: 7px 12px;
+  border-radius: 8px;
+  cursor:pointer;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+.logout-btn:hover { opacity: .95; transform: translateY(-1px); }
+
+
+.theme-toggle {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: white;
+  padding: 6px 8px;
+  border-radius: 8px;
+  font-size: 1rem;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  cursor:pointer;
+}
+.theme-toggle .icon-moon { display:none; }
+.players-page.dark-mode .theme-toggle .icon-moon { display:inline; }
+.players-page.dark-mode .theme-toggle .icon-sun { display:none; }
+
+
+
+.players-page.dark-mode .mb-4.row {
+  background: linear-gradient(180deg, rgba(40,40,40,0.95), rgba(30,30,30,0.95));
+  color: var(--text-dark);
+  border-color: rgba(255,255,255,0.03);
 }
 
 
-/* Estilo general del ng-select */
+.form-label { color: var(--muted); font-weight:600; }
+.form-control {
+  border-radius: 8px;
+  border: 1px solid rgba(9,63,180,0.08);
+  background: var(--input-bg);
+  color: var(--text-dark);
+  padding: .45rem .6rem;
+}
+.form-control::placeholder { color: rgba(17,24,39,0.45); }
+
+
+.players-page.dark-mode .form-control {
+  background: var(--input-bg);
+  border-color: rgba(255,255,255,0.06);
+  color: var(--text-dark);
+}
+.players-page.dark-mode .form-control::placeholder { color: rgba(230,230,230,0.45); }
+
+
 ::ng-deep .ng-select-dark .ng-select-container {
-  background-color: #343a40 !important;
-  color: #fff !important;
-  border: 1px solid #6c757d !important;
-  border-radius: 0.25rem !important;
-  padding: 0.375rem 0.75rem !important;
-  font-size: 1rem !important;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
-/* Efecto al enfocar */
-::ng-deep .ng-select-dark.ng-select-focused .ng-select-container {
-  border-color: #86b7fe !important;
-  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
-}
-
-/* Input de búsqueda interno */
-::ng-deep .ng-select-dark .ng-dropdown-panel input[type='text'] {
-  background-color: #343a40 !important;
-  color: #fff !important;
-  border: 1px solid #6c757d !important;
-  padding: 0.375rem 0.75rem !important;
-  border-radius: 0.25rem !important;
-  font-size: 1rem !important;
-  outline: none !important;
+  background-color: var(--input-bg) !important;
+  color: var(--text-dark) !important;
+  border: 1px solid rgba(9,63,180,0.08) !important;
+  border-radius: .35rem !important;
+  padding: .325rem .6rem !important;
   box-shadow: none !important;
-  margin: 5px !important;
 }
+::ng-deep .ng-select-dark .ng-dropdown-panel {
+  background-color: var(--surface) !important;
+  color: var(--text-dark) !important;
+  border: 1px solid rgba(9,63,180,0.08) !important;
+}
+::ng-deep .ng-select-dark .ng-option { color: var(--text-dark) !important; background: var(--surface) !important; }
 
-/* Opcional: al enfocar la barrita de búsqueda */
-::ng-deep .ng-select-dark .ng-dropdown-panel input[type='text']:focus {
-  border-color: #86b7fe !important;
-  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25) !important;
+.table-responsive { margin-top: 1rem; border-radius: 10px; overflow: hidden; background: transparent; }
+.players-table {
+  width:100%;
+  border-collapse: collapse;
+  background: transparent; 
+  color: var(--text-dark);
 }
-
-.rating-circle {
-  width: 50px;
-  height: 50px;
-  margin: auto;
-}
-
-.circular-chart {
-  display: block;
-  margin: auto;
-  max-width: 100%;
-  max-height: 100%;
-}
-
-.circle-bg {
-  fill: none;
-  stroke: #444;
-  stroke-width: 3.8;
-}
-
-.circle {
-  fill: none;
-  stroke-width: 3.8;
-  stroke-linecap: round;
-  transform: rotate(-90deg);
-  transform-origin: center;
-  transition: stroke 0.3s;
-}
-
-.percentage {
-  fill: #fff;
-  font-family: sans-serif;
-  font-size: 0.5em;
-  text-anchor: middle;
-}
-.high-rating .circle {
-  stroke: #00e676; /* verde */
-}
-
-.medium-rating .circle {
-  stroke: #ffc107; /* amarillo */
-}
-
-.low-rating .circle {
-  stroke: #ff3d00; /* rojo */
-}
-.circle {
-  animation: drawCircle 1s ease-out forwards;
-}
-
-@keyframes drawCircle {
-  from {
-    stroke-dasharray: 0 100;
-  }
-  to {
-    stroke-dasharray: var(--dasharray, 75 100);
-  }
-}
-.rating-circle {
-  border-radius: 50%;
-  padding: 2px;
-  background: radial-gradient(circle, #444 30%, #111);
-  box-shadow: 0 0 4px rgba(255, 255, 255, 0.2);
-}
-
-.position-badge {
-  font-weight: bold;
-  padding: 6px 12px;
-  font-size: 0.85rem;
-  border-radius: 12px;
-  box-shadow: 0 0 6px rgba(255, 255, 255, 0.1);
+.players-table thead th {
+  background: linear-gradient(90deg, var(--fut-blue), var(--fut-blue-light));
+  border: none;
+  padding: 12px 14px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  font-size: .85rem;
 }
 
-th.sortable {
-  cursor: pointer;
-  user-select: none;
-}
-
-th.sortable:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-}
-
-th.sortable i {
-  transition: transform 0.3s ease;
-}
-.table-row-clickable {
+.players-table tbody tr {
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  transition: background .18s ease, transform .12s ease;
   cursor: pointer;
 }
-.table-row-clickable:hover {
-  background-color: #333 !important;
-}
-.clickable {
-  cursor: pointer;
-}
-.table-row {
-  transition: background-color 0.2s ease, transform 0.1s ease;
-}
-.table-row:hover {
-  transform: scale(1.01);
-}
-.fifa-card-fake {
-  background: linear-gradient(to bottom, #3c3c3c, #1b1b1b);
-  border: 3px solid gold;
-  border-radius: 1.5rem;
-  width: 100%;
-  max-width: 330px;
-  box-shadow: 0 0 25px rgba(255, 215, 0, 0.2);
-  font-family: 'Arial Black', sans-serif;
-  padding: 2rem 1.5rem;
-  position: relative;
+.players-table tbody tr:hover { background: rgba(9,63,180,0.03); transform: translateY(-2px); }
+
+
+.players-page.dark-mode .players-table tbody tr { border-color: rgba(255,255,255,0.03); }
+.players-page.dark-mode .players-table td,
+.players-page.dark-mode .players-table th {
+  color: var(--text-dark) !important;
 }
 
-.fifa-rating {
-  position: absolute;
-  top: 12px;
-  left: 16px;
-  font-size: 1.6rem;
-  font-weight: bold;
-}
 
-.fifa-position {
-  position: absolute;
-  top: 12px;
-  right: 16px;
-  font-size: 1.2rem;
-  text-transform: uppercase;
+.players-table td {
+  padding: 12px;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--text-dark);
 }
 
 .player-face {
-  width: 110px;
-  height: 110px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 2px solid white;
-  background-color: #222;
+  width:56px; height:56px; object-fit:cover; border-radius:50%;
+  border: 2px solid var(--fut-blue);
 }
 
-.fifa-name {
-  font-size: 1.3rem;
-  font-weight: bold;
-  margin-bottom: 0.2rem;
+.position-badge {
+  display:inline-block; font-weight:700; padding:6px 12px; font-size:.85rem;
+  border-radius:999px; color:white; letter-spacing:.6px; text-transform:uppercase;
+  box-shadow: 0 4px 10px rgba(9,63,180,0.08);
 }
+.position-badge.bg-primary { background: var(--fut-blue); }
+.position-badge.bg-success { background: #28a745; }
+.position-badge.bg-warning { background: #ffc107; color:#111; }
+.position-badge.bg-danger { background: #dc3545; }
 
-.fifa-club {
-  font-size: 0.9rem;
-  font-style: italic;
-  color: #ccc;
+.rating-circle { width:50px; height:50px; margin:auto; }
+.circular-chart { display:block; margin:auto; max-width:100%; max-height:100%; }
+.circle-bg { fill:none; stroke:#eee; stroke-width:3.8; }
+.circle { fill:none; stroke-width:3.8; stroke-linecap:round; transform:rotate(-90deg); transform-origin:center; transition: stroke .3s; }
+.percentage { fill: var(--text-dark); font-family: sans-serif; font-size: .5em; text-anchor: middle; }
+.high-rating .circle { stroke: #00c853; }
+.medium-rating .circle { stroke: #ffc107; }
+.low-rating .circle { stroke: #ff3d00; }
+
+
+.fifa-card-fake {
+  background: linear-gradient(180deg, rgba(9,63,180,0.95), rgba(27,27,27,0.95));
+  border: 2px solid rgba(237,53,0,0.9);
+  border-radius: 1rem;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 12px 40px rgba(9,63,180,0.18);
+  padding: 1.8rem;
+  position: relative;
 }
+.fifa-card-fake .fifa-rating { position:absolute; top:12px; left:14px; font-size:1.4rem; font-weight:700; color:var(--fut-white); }
+.fifa-card-fake .fifa-position { position:absolute; top:12px; right:14px; font-size:1.1rem; color:var(--fut-white); }
+.fifa-card-fake .player-face { border: 3px solid rgba(255,255,255,0.18); }
 
+.fs-3 { font-size: 1.45rem; }
+.small { font-size: .85rem; }
+.players-page th { cursor:pointer; }
+.players-page th.sortable:hover { opacity:.95; transform: translateY(-1px); }
+.players-page .btn-outline-light {
+  color: var(--fut-blue);
+  border-color: rgba(9,63,180,0.15);
+  background: transparent;
+  transition: all .15s ease;
+}
+.players-page .btn-outline-light:hover { background: rgba(9,63,180,0.06); border-color: rgba(9,63,180,0.25); }
+
+@media (max-width: 992px) {
+  .players-table thead th { font-size: .78rem; padding: 10px; }
+  .player-face { width:48px; height:48px; }
+  .brand-name { font-size: 1rem; }
+}
+@media (max-width: 576px) {
+  .mb-4.row { padding: .9rem; }
+  .theme-toggle, .logout-btn { padding: 6px 8px; font-size: .95rem; }
+  .players-table td { padding: 8px; font-size: .85rem; }
+}

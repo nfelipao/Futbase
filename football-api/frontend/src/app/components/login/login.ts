@@ -15,6 +15,7 @@ export class LoginComponent {
   loginForm: FormGroup;
   loading = false;
   error = '';
+  isDarkMode = false;
 
   constructor(
     private fb: FormBuilder,
@@ -35,13 +36,20 @@ export class LoginComponent {
     this.loading = true;
     this.authService.login(this.loginForm.value).subscribe({
       next: (response) => {
-        localStorage.setItem('access_token', response.access_token); // Guardamos el token
-        this.router.navigate(['/api/players']);  // Redirigimos a la página principal
+        localStorage.setItem('access_token', response.access_token); 
+        this.router.navigate(['/api/players']);  
       },
       error: (err) => {
         this.error = 'Credenciales incorrectas';
         this.loading = false;
       }
     });
+
   }
-}
+      toggleDarkMode():void {
+      this.isDarkMode = !this.isDarkMode;
+                
+  }
+ }
+
+

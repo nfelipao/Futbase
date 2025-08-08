@@ -1,6 +1,21 @@
-<div class="container-fluid py-4 bg-dark text-white min-vh-100">
-  <div class="mb-4 row">
-      <button (click)="onLogout()">Cerrar sesión</button>
+<div class="container-fluid min-vh-100 players-page" [class.dark-mode]="isDarkMode">
+
+  <div class="mb-4 row top-wrapper">
+    <div class="top-bar">
+      <div class="brand" role="banner" aria-label="FutBase">
+        <span class="brand-logo">⚽</span>
+        <span class="brand-name"><span class="brand-fut">Fut</span><span class="brand-base">Base</span></span>
+      </div>
+
+      <div class="top-actions">
+        <button class="theme-toggle" type="button" (click)="toggleDarkMode()" aria-label="Cambiar tema">
+          <span class="icon-sun">☀️</span>
+          <span class="icon-moon">🌙</span>
+        </button>
+        <button class="logout-btn" (click)="onLogout()">Logout</button>
+      </div>
+    </div>
+
     <div class="col-md-6 col-lg-4 mb-3">
       <label for="name" class="form-label">Buscar por Nombre:</label>
       <input id="name" type="text" class="form-control" [(ngModel)]="searchName" (input)="onFilterChange()"
@@ -21,10 +36,9 @@
       </ng-select>
     </div>
 
+    <div class="table-responsive mt-3">
 
-    <div class="table-responsive">
-      <table class="table table-dark table-hover table-striped table-bordered aling-middle">
-
+      <table class="table table-hover table-striped table-bordered align-middle players-table">
         <thead>
           <tr>
             <th class="text-center">
@@ -52,8 +66,7 @@
               <span *ngIf="sortColumn === 'position' && sortDirection === 'desc'">↓</span>
             </th>
 
-            <th (click)="setSort('nationality')" class="text-center sortable align-middle"
-              title="Ordenar por Nacionalidad">
+            <th (click)="setSort('nationality')" class="text-center sortable align-middle" title="Ordenar por Nacionalidad">
               Nacionalidad
               <span *ngIf="sortColumn !== 'nationality'">↕</span>
               <span *ngIf="sortColumn === 'nationality' && sortDirection === 'asc'">↑</span>
@@ -66,18 +79,17 @@
               <span *ngIf="sortColumn === 'rating' && sortDirection === 'asc'">↓</span>
               <span *ngIf="sortColumn === 'rating' && sortDirection === 'desc'">↑</span>
             </th>
-            <!--
-            <th class="text-center align-middle">Detalle</th>
           </tr>
-        -->
         </thead>
-
 
         <tbody>
           <tr *ngFor="let player of sortedPlayers" (click)="openPlayerModal(player)" class="table-row clickable">
-            <td class="text-center align-middle"><img [src]="player.playerFaceUrl" alt="{{ player.name }}" width="50"
-                class="rounded-circle border border-2" /></td>
+            <td class="text-center align-middle">
+              <img [src]="player.playerFaceUrl" alt="{{ player.name }}" width="50" class="rounded-circle player-face" />
+            </td>
+
             <td class="text-center align-middle">{{ player.name }}</td>
+
             <td class="text-center align-middle">{{ player.club }}</td>
 
             <td class="text-center align-middle">
@@ -86,10 +98,10 @@
               </span>
             </td>
 
-
             <td class="text-center align-middle">
               {{ nationalityFlags[player.nationality] || '' }} {{ player.nationality }}
             </td>
+
             <td class="text-center align-middle">
               <div class="rating-circle" [ngClass]="getRatingClass(player.rating)">
                 <svg viewBox="0 0 36 36" class="circular-chart">
@@ -103,11 +115,6 @@
                 </svg>
               </div>
             </td>
-            <!--Aca puede ir lo de la version de fifa
-            <td class="text-center align-middle">
-              <i class="bi bi-eye-fill text-info"></i>
-            </td>
-          -->
           </tr>
         </tbody>
       </table>
@@ -120,10 +127,7 @@
     </div>
   </div>
 
-
-
-  <div class="modal fade" id="playerDetailModal" tabindex="-1" aria-labelledby="playerDetailModalLabel"
-    aria-hidden="true">
+  <div class="modal fade" id="playerDetailModal" tabindex="-1" aria-labelledby="playerDetailModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
       <div class="modal-content bg-dark text-white">
         <div class="modal-header border-0">
@@ -133,7 +137,6 @@
 
         <div class="modal-body d-flex justify-content-center">
           <div class="fifa-card-fake text-center text-white p-4 rounded position-relative">
-
             <div class="fifa-rating">{{ selectedPlayer?.rating }}</div>
             <div class="fifa-position">{{ selectedPlayer?.position }}</div>
 
@@ -148,7 +151,6 @@
 
             <div class="fifa-club mb-3">{{ selectedPlayer?.club }}</div>
 
-            <!-- Stat Grid -->
             <div class="row text-start small g-2 mb-3">
               <div class="col-4"><strong>PAC</strong><br>{{ selectedPlayer?.speed }}</div>
               <div class="col-4"><strong>SHO</strong><br>{{ selectedPlayer?.shooting }}</div>
@@ -158,16 +160,21 @@
               <div class="col-4"><strong>PHY</strong><br>{{ selectedPlayer?.physic ?? '-' }}</div>
             </div>
 
-            <!-- Extra Info -->
             <div class="info-extra text-start small border-top pt-2">
               <div><strong>Edad:</strong> {{ selectedPlayer?.age }}</div>
               <div><strong>Altura:</strong> {{ selectedPlayer?.heightCm }} cm</div>
               <div><strong>Peso:</strong> {{ selectedPlayer?.weightKg }} kg</div>
               <div><strong>FIFA:</strong> {{ selectedPlayer?.fifaVersion }} - V{{ selectedPlayer?.fifaUpdate }}</div>
             </div>
-
           </div>
         </div>
       </div>
     </div>
   </div>
+
+</div>
+
+
+
+
+

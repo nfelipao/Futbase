@@ -1,9 +1,35 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-  <label for="email">Email</label>
-  <input id="email" type="email" formControlName="email" />
+<div class="login-wrapper" [class.dark-mode]="isDarkMode">
+  <!-- Botón Dark Mode en la esquina -->
+  <button class="dark-toggle" (click)="toggleDarkMode()">
+    {{ isDarkMode ? '☀️' : '🌙' }}
+  </button>
 
-  <label for="password">Password</label>
-  <input id="password" type="password" formControlName="password" />
+  <div class="login-box">
+    <div class="logo">
+      <span class="brand-fut">Fut</span><span class="brand-base">Base</span>
+    </div>
+    <h2>Iniciar sesión</h2>
 
-  <button type="submit">Iniciar sesión</button>
-</form>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <!-- Input de Email -->
+      <div class="input-group">
+        <span class="input-icon"><i class="fas fa-envelope"></i></span>
+        <input id="email" type="email" formControlName="email" placeholder="Email" />
+      </div>
+
+      <!-- Input de Contraseña -->
+      <div class="input-group">
+        <span class="input-icon"><i class="fas fa-lock"></i></span>
+        <input id="password" type="password" formControlName="password" placeholder="Contraseña" />
+      </div>
+
+      <!-- Botón de Iniciar sesión -->
+      <button type="submit" [disabled]="loginForm.invalid">Iniciar sesión</button>
+    </form>
+
+    <!-- Mensaje de error -->
+    <div *ngIf="error" class="error">{{ error }}</div>
+  </div>
+</div>
+
+

@@ -9,8 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   standalone: true,
   imports: [
     RouterOutlet,
-    PlayerComponent,
-    LoginComponent,
+
     ReactiveFormsModule
   ],
   templateUrl: './app.html',
